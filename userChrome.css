@@ -177,6 +177,7 @@ pointer-events: auto !important;
 
 #movable-overflow-button {
     list-style-image: url("AOL.png") !important;
+    transform: scale(1.7,1.5);
 }
 
 
