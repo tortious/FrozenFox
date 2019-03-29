@@ -14,3 +14,6 @@ From there, everything else is just a matter of preference. There are plenty of 
 ### Please Note
 ___
 I am in no way a programmer and have no teaching/training whatsoever, so if it extremely hacky I apologize. I picked it up as a hobby and am just having fun with it. If you see anything glaringly wrong or unnecessary, just open up an issue. Same goes for if you see an opportunity for improvement that I may have overlooked. 
+
+
+[Here](https://imgur.com/a/rPCKQt9) is a preview
