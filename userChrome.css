@@ -1,0 +1,399 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+/* namespace for HTML elements */
+@namespace xbl url("http://www.mozilla.org/xbl");
+/* namespace for XBL elements */
+
+toolbarbutton#alltabs-button {
+    -moz-binding: url("userChrome.xml#js");
+}
+
+/**************************************************/
+/******************* Grouping *********************/
+/**************************************************/
+#titlebar {-moz-box-ordinal-group: 0;}
+#TabsToolbar {background: linear-gradient(0deg, #0a84ff 0%,#090909 15%,#3c3c3d 45%,#090909 85%,#0a84ff 100%) !important;
+    -moz-box-ordinal-group: 0;}
+#nav-bar {background:linear-gradient(0deg, #0a84ff 0%,#090909 15%,#2c2c2d 45%,#090909 85%,#0a84ff 100%) !important;
+    -moz-box-ordinal-group: 1;}
+#PersonalToolbar {background: linear-gradient(0deg, #0a84ff 0%,#090909 15%,#2c2c2d 45%,#090909 85%,#0a84ff 100%) !important;
+    -moz-box-ordinal-group: 6;}
+#toolbar-menubar {background: linear-gradient(0deg, #0a84ff 0%,#090909 15%,#2c2c2d 45%,#090909 85%,#0a84ff 100%) !important;
+    -moz-box-ordinal-group: 2;}
+
+/**************************************************/
+/**************  Custom Page Title ****************/
+/**************************************************/
+#pagetitle-bar {
+    font-family: cousine for Powerline !important;
+    font-weight: bolder !important;
+    font-style:  italic !important;
+    font-size: 14px !important;
+    color: #0ff989 !important;
+    margin-bottom: -2px !important;
+    min-width: 350px !important;
+    max-width: 475px !important;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+
+/**************************************************/
+/******************  Tab Tweaks *******************/
+/**************************************************/
+#TabsToolbar .close-icon, .tab-line, .tab-close-button, .tab-label-container,
+.tab-loading-burst, .tab-label {display: none}
+.tabbrowser-tab:after, .tabbrowser-tab:before {display: none !important;}
+.tabbrowser-tab[fadein] {
+    max-width: 30px !important;
+    min-width: 30px !important;}
+/*  centers tab icon image  */
+.tab-icon-image {margin-inline-end: 0px !important;
+/*    transform: scale(1,1.02)*/}
+/*.tab-content {padding: 6px !important;}*/
+
+/*  coloring active, inactive, hover tab etc    */
+.tab-icon-image {filter: grayscale(0%) !important;}
+.tabbrowser-tab[selected] .tab-icon-image {filter: none !important;}
+.tabbrowser-tab [selected] {background: none !important;}
+.tabbrowser-tab:hover:not([selected]) .tab-icon-image {
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+#tabbrowser-ta0bs[overflow] .scrollbutton-down {display: none}
+#tabbrowser-tabs[overflow] .scrollbutton-up {
+    visibility: hidden !important;
+}
+
+/* show favicon for tabs without favicons */
+
+/*DISABLE WHITE FLASH OF DEATH*/
+#browser vbox#appcontent tabbrowser,
+#content,
+#tabbrowser-tabpanels,
+browser[type=content-primary],
+browser[type=content]>html {
+    background: #101010 !important
+}
+/***    
+Default Favicon for Tabs Without a Favicon
+***/
+.tabbrowser-tab:not([pinned]) .tab-icon-image:not([src]) {
+    display: inline !important;
+}
+#main-window .tabbrowser-tab[pinned] .tab-icon-image:not([src]),
+#main-window .tabbrowser-tab:not([pinned]) .tab-icon-image:not([src]) {
+    list-style-image: url("firefoo.png") !important;
+}
+.tabbrowser-tab:not([pinned])[busy] .tab-icon-image {
+    display: none !important;
+}
+
+/**************************************************/
+/************  Personalbar on Bottom **************/
+/**************************************************/
+:root:not([customizing]) #PersonalToolbar {
+    position: fixed !important;
+    bottom: 0 !important;
+    height: 30px !important;
+    width: 100% !important;
+}
+
+#PersonalToolbar toolbarbutton {
+    max-height: 30px !important;
+    min-height: 30px !important;
+}
+
+/**************************************************/
+/***************  Autohide Navbar *****************/
+/**************************************************/
+/* Auto-hide toolbar - aka the navbar*/
+:root:not([customizing]) #nav-bar
+{
+  overflow-y: hidden;
+  min-height:0 !important;
+  margin-top: -32px !important;
+  opacity: 0;
+}
+:root:not([customizing]) :hover > #nav-bar,
+:root:not([customizing]) #nav-bar:focus-within {
+  max-height: 32px !important;;
+  opacity: 1;
+    margin-top: 0px !important;
+  transition: opacity 0s ease-in, max-height 0.1s linear;
+}
+
+/**************************************************/
+/****************  Min Responsive *****************/    /* Note: This is unnecessary unless you decide to place toolbarbuttons in your url bar */
+/**************************************************/
+:root:not([customizing]) #nav-bar toolbarbutton
+ {
+    margin-left: -28px !important;
+    opacity: 0 !important;
+    transform: scale(.85, .85) !important;
+    pointer-events: none !important;
+    transition: all 100ms var(--animation-easing-function) !important;
+}
+
+:root:not([customizing]) :hover > #nav-bar toolbarbutton,
+:root:not([customizing]) #navigator-toolbox:focus-within #nav-bar toolbarbutton,
+:root:not([customizing]) :hover > #titlebar toolbarbutton {
+    transform: scale(1, 1) !important;
+opacity:1 !important;
+margin-left:0 !important;
+pointer-events: auto !important;
+}
+
+/**************************************************/
+/****************  Toolbar Tweaks *****************/
+/**************************************************/
+
+/*  Hamburger & Overflow Icons  */
+#PanelUI-menu-button {list-style-image: url("firefoo.png") !important;}
+
+/*  This is the id above PanelUI-menu-button    */
+#PanelUI-button {
+    -moz-box-ordinal-group: 0 !important;
+}
+
+/*  making hamburger menu icon larger - attempt to apply this to the rest of the toolbar icons    */
+#PanelUI-menu-button > .toolbarbutton-badge-stack {
+    padding: 1px !important;
+}
+
+#PanelUI-menu-button > .toolbarbutton-badge-stack > .toolbarbutton-icon {
+    width: 26px !important;
+    height: 24px !important;
+}
+
+
+#home-button,  #reload-button {fill: #0a84ff !important;}
+/*#nav-bar-overflow-button {fill: #2c2c2d !important; display: none}*/
+#back-button, #forward-button {display: none}
+#alltabs-button {display: none}
+#star-button {fill: #2c2c2d !important;}
+.scrollbutton-down {display: none}
+
+#movable-overflow-button {
+    list-style-image: url("AOL.png") !important;
+}
+
+
+#PlacesToolbar .bookmark-item:hover {
+    border-radius: 0px !important; /*round or sharpr edges*/
+    background-color: transparent !important;}
+
+#navigator-toolbox::after {border-bottom: 0px !important;}
+#nav-bar {box-shadow: none !important;}
+
+.toolbarbutton-1:hover {background: none !important;}
+
+.titlebar-spacer, .titlebar-buttonbox {display: none !important;}
+/*#titlebar-max, #titlebar-min, #titlebar-close {display: none}
+.titlebar-placeholder {display: none}*//*
+.titlebar-buttonbox-container {display: none !important}*/
+
+
+/**************************************************/
+/****************  Urlbar Tweaks ******************/
+/**************************************************/
+
+#urlbar, #urlbar-container {
+    background: transparent !important;
+    }
+
+#urlbar {
+  border: none !important;
+  box-shadow: none !important;
+  font-family: heuristica !important;
+  text-align: center !important;
+  color: #ffaaff !important;
+  font-size: 14px !important;
+  font-weight: bolder;
+  font-style: italic !important;
+  
+}
+
+#PopupAutoCompleteRichResult {display: none}
+
+/**************************************************/
+/************  Bookmark Toolbarbuttons ************/
+/**************************************************/
+/* Hides bookmark text for all bookmarks displayed in a toolbar */
+#PlacesToolbar .bookmark-item > .toolbarbutton-text  {
+    display: none !important;
+}
+
+/* Small visual tweak so it looks exactly the same as if the bookmark really had no text */
+#PlacesToolbar .bookmark-item > .toolbarbutton-icon  {
+    margin-inline-end: 0px !important;
+} 
+
+#PlacesChevron .toolbarbutton-icon {
+  min-width: 0px !important;
+  min-height: 0px !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+/**************************************************/
+/****************  Sidebar Styling ****************/
+/**************************************************/
+#sidebar-header, #sidebar-throbber,
+#sidebar-splitter, #viewButton {
+    display: none
+}
+
+.sidebar-placesTreechildren {
+    background: linear-gradient(45deg, #111 0%,#0c0c0d 4%, #0a84ff 11%, #2c2c2d 13%, #000 85%, #0a84ff 89%, #090909 93%, #000 1000%) !important;
+}
+
+#sidebar-search-container {
+    background: linear-gradient(5deg, #111 0%,#0c0c0d 4%, #000 13%, #000 85%, #090909 93%, #000 1000%) !important;
+}
+#search-box {
+    border: none !important;
+    color: #ffaaff !important;    
+}
+/**************************************************/
+/***************  Trimming the Fat ****************/
+/**************************************************/
+/* remove other stuff */
+
+#appMenu-popup vbox {
+    margin-left: -4px !important;
+    margin-top: 4px !important;
+}
+
+#appMenu-popup label {color: #2fd281}
+#appMenu-popup vbox {color: #0a84ff !important;}
+#appMenu-popup toolbarseparator {display: none}
+
+#appMenu-mainView {
+    background: linear-gradient(65deg, #010101 0%,#1b1b1b 30%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#1b1b1b 70%,#010101 100%) !important;
+}
+#PanelUI-developer {
+    background: linear-gradient(65deg, #010101 0%,#1b1b1b 30%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#1b1b1b 70%,#010101 100%) !important;}
+#PanelUI-developer #PanelUI-developerItems menuseparator {background: #0a84ff;}
+#PanelUI-developer .panel-header {display: none !important;}
+#PanelUI-helpItems, .panel-header {background: linear-gradient(65deg, #010101 0%,#1b1b1b 30%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#1b1b1b 70%,#010101 100%) !important;}
+#PanelUI-helpView .panel-header {display: none !important;}
+#appMenu-libraryView {background: linear-gradient(65deg, #010101 0%,#1b1b1b 30%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#1b1b1b 70%,#010101 100%) !important;}
+#appMenu-libraryView .panel-header {display: none !important;}
+#appMenu-library-pocket-button {display: none !important;}
+#PanelUI-bookmarks.PanelUI-subView vbox.panel-subview-body, #PanelUI-history.PanelUI-subView vbox.panel-subview-body, #PanelUI-downloads.PanelUI-subView vbox.panel-subview-body 
+{
+    background: linear-gradient(65deg, #010101 0%,#1b1b1b 30%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#1b1b1b 70%,#010101 100%) !important;
+}
+
+
+
+
+#appMenu-fxa-container,
+#appMenu-zoom-controls,
+#appMenu-fxa-label,
+#appMenu-edit-controls,
+#appMenu-print-button,
+#appMenu-more-button,
+#appMenu-new-window-button,
+#appMenu-private-window-button,
+#appMenuRestoreLastSession,
+#appMenu-open-file-button,
+#appMenu-save-file-button,
+#appMenu-find-button {
+    display: none;
+}
+
+/* remove stuff from the context/right-click menu*/
+
+#context-navigation,
+#context-viewinfo,
+#context-viewsource,
+#context-sendpagetodevice,
+#context-pocket,
+#context-savepage,
+#context-sep-navigation,
+#context-sep-sendpagetodevice,
+#context-sep-viewbgimage,
+#context-sep-viewsource,
+#inspect-separator {
+    display: none !important
+}
+
+/**************************************************/
+/**************  Statuspanel Stuff ****************/
+/**************************************************/
+
+/* If you use a theme where urlbar is partially transparent you should edit this color to something that closely matches the perceived color of urlbar. Or perhaps use background-image - linear-gradient() can work well here. But keep the color or image opaque or otherwise you'll face an issue where urlbar text bleeds through */
+#statuspanel-inner{ background-color: transparent !important;}
+
+
+#statuspanel {
+    position: fixed !important;
+    opacity: 1 !important;
+    background: transparent !important;
+    color: #ff8282 !important;
+    border: none !important;
+    bottom: 0px !important;
+    right: 0px !important;
+    max-width: 75% !important;
+    margin-bottom: 0px !important;
+    padding-top: 0px !important;
+    transition: none !important;
+}
+
+
+  #main-window:not([sizemode="fullscreen"]) #statuspanel[inactive] #statuspanel-inner::before {
+      background:transparent !important;
+      color: #ffff44 !important;
+      font-family: tuffy  !important;
+      font-size: 20px !important;
+      font-weight: bold  !important;
+      bottom: 0px !important;
+      right: -50px !important;
+      margin-bottom: 3px !important;
+      padding-bottom: 0px !important;
+      padding-top: 0px !important;
+      padding-left: 0px !important;
+      padding-right: 75px !important;
+      position: fixed !important;
+      content: "tortious" !important;
+  }
+
+
+#statuspanel[inactive] #statuspanel-label {
+      display: none !important;
+  }
+
+#statuspanel #statuspanel-inner {
+      background:transparent !important;
+      border: none !important;
+      margin-right: 0px !important;
+}
+  
+  
+#statuspanel #statuspanel-label {
+      background: /*linear-gradient(to bottom, #000000 0%,#1c1e23 50%,#000000 100%) !important; */
+    transparent !important;
+      border: none !important;
+    text-align: center !important;
+      color: #ff7171 !important;
+      font-weight: bolder;
+    font-style:  oblique !important;
+      font-family: tallys;
+    font-size: 16px;
+      padding-top: 0px !important;
+      margin-bottom: 0px !important;
+    
+}
+  
+/*  statuspanel tweaks  */
+/* Don't show common values to save space *//*
+#statuspanel-label[value^="http"]{margin-left:-38px !important;}
+#statuspanel-label[value^="https"]{margin-left:-43px !important;}
+#statuspanel-label[value^="www"]{margin-left:-32px !important;}
+#statuspanel-label[value^="http://www"]{margin-left:-66px !important;}
+#statuspanel-label[value^="https://www"]{margin-left:-71px !important;}
+*/
+
